@@ -7,6 +7,7 @@ package fr.skah.mdb;
  */
 
 import fr.skah.mdb.commands.Command;
+import fr.skah.mdb.config.BotConfigurationManager;
 import fr.skah.mdb.exceptions.InvalidCommand;
 import fr.skah.mdb.exceptions.InvalidModule;
 import fr.skah.mdb.listeners.MessageListener;
@@ -28,12 +29,11 @@ public class ModulableDiscordBot {
     public static final HashMap<String, Module> MODULES_LOADED = new HashMap<>();
     public static final HashMap<String, Command> COMMANDS = new HashMap<>();
     public static final HashMap<String, ListenerAdapter> LISTENERS = new HashMap<>();
-
     public static void main(String[] args) {
         try {
             new ModuleLoader().loadModules();
             MODULES_LOADED.values().forEach(Module::onLoad);
-            JDA jda = JDABuilder.createDefault("YOUR-TOKEN").enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
+            JDA jda = JDABuilder.createDefault(new BotConfigurationManager().loadConfiguration().getBotConfigObject().getBotToken()).enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
             jda.addEventListener(new MessageListener());
             LISTENERS.values().parallelStream().forEach(jda::addEventListener);
             Thread.sleep(5000);

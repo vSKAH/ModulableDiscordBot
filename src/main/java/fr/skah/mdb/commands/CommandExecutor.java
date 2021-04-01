@@ -25,17 +25,18 @@ public class CommandExecutor {
                 processCommand(command, args);
                 return;
             }
+            System.out.println(commandEntry.getKey() + "     " + commandEntry.getValue().getSyntaxe());
         }
-
         Util.sendTemporaryMessage(message.getTextChannel(), ":x: Cette commande n'existe pas. \nVeuillez saisir 'Help pour afficher la liste des commandes !", 10);
     }
 
     private CommandState processCommand(Command command, String[] args) {
 
-        if (command.getGuild().getMemberById(command.getUser().getIdLong()) != null && command.getPermission() != null) {
+        if (command.getGuild().getMemberById(command.getUser().getIdLong()) != null) {
+
             Member member = command.getGuild().getMemberById(command.getUser().getIdLong());
-            if (member != null && member.hasPermission(command.getPermission())) {
-                command.getTextChannel().sendMessage("Vous ne pouvez pas éxecuter la commande " + command.getCommandName() + " sans y être autorisé").queue();
+            if (member != null && command.getPermission() != null && !member.hasPermission(command.getPermission())) {
+                command.getTextChannel().sendMessage("Vous ne pouvez pas exécuter la commande " + command.getCommandName() + " sans y être autorisé").queue();
                 return CommandState.ERROR_PERMISSION;
             }
 
