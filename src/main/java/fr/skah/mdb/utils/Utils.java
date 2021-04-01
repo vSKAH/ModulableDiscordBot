@@ -29,14 +29,14 @@ public class Utils {
         return message.getMentionedMembers().size() == 0;
     }
 
-    public static boolean userHasMoreElevatedRank(Member target, Member executor) {
+    public static boolean targetHasMoreElevatedRank(Member target, Member executor) {
 
         if (target.getRoles().size() == 0) return false;
 
-        int higherTarget = target.getRoles().parallelStream().mapToInt(Role::getPosition).max().getAsInt();
-        int higherExecutor = executor.getRoles().parallelStream().mapToInt(Role::getPosition).max().getAsInt();
+        int higherTarget = target.getRoles().parallelStream().mapToInt(Role::getPosition).max().orElse(0);
+        int higherExecutor = executor.getRoles().parallelStream().mapToInt(Role::getPosition).max().orElse(0);
 
-        return higherTarget >= higherExecutor;
+        return higherTarget > higherExecutor;
     }
 
     public static String getRemainingTime(long secondes) {

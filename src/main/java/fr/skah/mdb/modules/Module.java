@@ -6,6 +6,7 @@ package fr.skah.mdb.modules;
  *  * @Author Jimmy
  */
 
+import fr.skah.mdb.modules.loader.ModuleOptions;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.HashMap;
@@ -13,10 +14,9 @@ import java.util.UUID;
 
 public abstract class Module {
 
+    private ModuleOptions moduleOptions;
     private final HashMap<UUID, ListenerAdapter> listenerAdapterHashMap = new HashMap<>();
-    private String moduleName;
-    private String author;
-    private String version;
+
 
     /*
         On Bot Start Custom Module
@@ -38,31 +38,14 @@ public abstract class Module {
     public void onDisable() {
     }
 
-    /* Get Informations of Module */
-    public String getModuleName() {
-        return moduleName;
+    public ModuleOptions getModuleOptions() {
+        return moduleOptions;
     }
 
-    /* Set Information of Module */
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
+    public void setModuleOptions(ModuleOptions moduleOptions) {
+        this.moduleOptions = moduleOptions;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
 
     /*Get listeners of bot.

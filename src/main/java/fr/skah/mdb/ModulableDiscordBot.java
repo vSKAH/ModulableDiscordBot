@@ -11,6 +11,7 @@ import fr.skah.mdb.exceptions.InvalidCommand;
 import fr.skah.mdb.exceptions.InvalidModule;
 import fr.skah.mdb.listeners.MessageListener;
 import fr.skah.mdb.modules.Module;
+import fr.skah.mdb.modules.loader.ModuleOptions;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -20,45 +21,47 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.util.HashMap;
-import java.util.UUID;
 
-public class ModulableDiscordBot extends Module {
+public class ModulableDiscordBot {
 
-    public static final HashMap<UUID, Command> COMMANDS = new HashMap<>();
-    public static final HashMap<UUID, ListenerAdapter> LISTENERS = new HashMap<>();
-
-    public ModulableDiscordBot() throws LoginException, InterruptedException {
-        onLoad();
-        JDA jda = JDABuilder.createDefault("MY-TOKEN").enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
-        jda.addEventListener(new MessageListener());
-        LISTENERS.values().parallelStream().forEach(jda::addEventListener);
-        Thread.sleep(5000);
-        onEnable();
-    }
+    public static final HashMap<String, Module> MODULES_LOADED = new HashMap<>();
+    public static final HashMap<String, Command> COMMANDS = new HashMap<>();
+    public static final HashMap<String, ListenerAdapter> LISTENERS = new HashMap<>();
 
     public static void main(String[] args) {
         try {
-            new ModulableDiscordBot();
+            MODULES_LOADED.values().forEach(Module::onLoad);
+            JDA jda = JDABuilder.createDefault("MY-TOKEN").enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
+            jda.addEventListener(new MessageListener());
+            LISTENERS.values().parallelStream().forEach(jda::addEventListener);
+            Thread.sleep(5000);
+            MODULES_LOADED.values().forEach(Module::onEnable);
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+
     public static void registerCommand(Module module, Command command) throws InvalidModule, InvalidCommand {
 
-        if (module == null || module.getModuleName() == null || module.getModuleName().equalsIgnoreCase(""))
+        ModuleOptions moduleOptions = module.getModuleOptions();
+
+        if (moduleOptions == null || moduleOptions.getModuleName() == null || moduleOptions.getModuleName().equalsIgnoreCase(""))
             throw new InvalidModule("Can't register command, module or module name is null or empty");
         if (command == null)
             throw new InvalidCommand("Can't register command, module or module name is null or empty");
 
-        COMMANDS.put(UUID.fromString(module.getModuleName() + module.getAuthor() + module.getVersion()), command);
+        COMMANDS.put(moduleOptions.getModuleName(), command);
     }
 
     public static void registerListener(Module module, ListenerAdapter listener) throws InvalidModule {
-        if (module == null || module.getModuleName() == null || module.getModuleName().equalsIgnoreCase(""))
+
+        ModuleOptions moduleOptions = module.getModuleOptions();
+
+        if (moduleOptions == null || moduleOptions.getModuleName() == null || moduleOptions.getModuleName().equalsIgnoreCase(""))
             throw new InvalidModule("Can't register listener, module or module name is null or empty");
 
-        LISTENERS.put(UUID.fromString(module.getModuleName() + module.getAuthor() + module.getVersion()), listener);
+        LISTENERS.put(moduleOptions.getModuleName(), listener);
     }
 
 }
