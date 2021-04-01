@@ -18,3 +18,9 @@ And I'm tired of being contacted to make discord bots
 - Community list modules
 - Example of development
 - Wiki
+
+# Contributions 
+All contributions are welcome!
+
+# LICENCE 
+MIT © vSKAH
