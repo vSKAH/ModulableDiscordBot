@@ -2,7 +2,6 @@
 A Modulable Discord Bot Write In Java. Includes Pre Made Command And Modules System.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9e4fc5fdb030429b990b613546518594)](https://app.codacy.com/gh/vSKAH/ModulableDiscordBot?utm_source=github.com&utm_medium=referral&utm_content=vSKAH/ModulableDiscordBot&utm_campaign=Badge_Grade_Settings)
-   [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f701bb3891e849e583e93d2a7565ffbe)](https://www.codacy.com/gh/vSKAH/ModulableDiscordBot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vSKAH/ModulableDiscordBot&amp;utm_campaign=Badge_Grade)
 
 ## Motivation 
 I haven't found any bot discord that can be modulated to perfection.
