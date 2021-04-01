@@ -9,15 +9,21 @@ And I'm tired of being contacted to make discord bots
 
 ## Feature
 
-- Custom Commands System
-- Modulable bot. If you want use XP Module with NWSF module you can !
-- You can create your own modules !
+Custom Commands System
+
+Modulable bot. If you want use XP Module with NWSF module you can !
+
+You can create your own modules !
 
 ## TO DO
-- Custom Class Loader to load Modules
-- Community list modules
-- Example of development
-- Wiki
+
+Custom Class Loader to load Modules
+
+Community list modules
+
+Example of development
+
+Wiki
 
 ## Contributions 
 All contributions are welcome!
