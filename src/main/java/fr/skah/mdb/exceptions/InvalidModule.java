@@ -8,7 +8,7 @@ package fr.skah.mdb.exceptions;
 
 public class InvalidModule extends Exception {
 
-    public InvalidModule(String message, Throwable cause) {
-        super(message, cause);
+    public InvalidModule(String message) {
+        super(message);
     }
 }

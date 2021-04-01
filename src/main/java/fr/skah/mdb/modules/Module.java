@@ -23,11 +23,9 @@ public abstract class Module {
         Method onLoad is called before method onEnable
      */
     public void onLoad() {
-
     }
 
     public void onEnable() {
-
     }
 
     /*
@@ -35,11 +33,9 @@ public abstract class Module {
         Method onUnload is called before method onDisable
     */
     public void onUnload() {
-
     }
 
     public void onDisable() {
-
     }
 
     /* Get Informations of Module */

@@ -47,16 +47,16 @@ public class ModulableDiscordBot extends Module {
     public static void registerCommand(Module module, Command command) throws InvalidModule, InvalidCommand {
 
         if (module == null || module.getModuleName() == null || module.getModuleName().equalsIgnoreCase(""))
-            throw new InvalidModule("Can't register command", new Throwable("Module or Module Name cannot be null"));
+            throw new InvalidModule("Can't register command, module or module name is null or empty");
         if (command == null)
-            throw new InvalidCommand("Can't register command", new Throwable("Command cannot be null"));
+            throw new InvalidCommand("Can't register command, module or module name is null or empty");
 
         COMMANDS.put(UUID.fromString(module.getModuleName() + module.getAuthor() + module.getVersion()), command);
     }
 
     public static void registerListener(Module module, ListenerAdapter listener) throws InvalidModule {
         if (module == null || module.getModuleName() == null || module.getModuleName().equalsIgnoreCase(""))
-            throw new InvalidModule("Can't register command", new Throwable("Module or Module Name cannot be null"));
+            throw new InvalidModule("Can't register listener, module or module name is null or empty");
 
         LISTENERS.put(UUID.fromString(module.getModuleName() + module.getAuthor() + module.getVersion()), listener);
     }

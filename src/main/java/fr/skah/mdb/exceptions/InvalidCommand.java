@@ -8,7 +8,7 @@ package fr.skah.mdb.exceptions;
 
 public class InvalidCommand extends Exception {
 
-    public InvalidCommand(String message, Throwable cause) {
-        super(message, cause);
+    public InvalidCommand(String message) {
+        super(message);
     }
 }
