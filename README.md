@@ -19,7 +19,8 @@ You can create your own modules !
 
 Community list modules
 
-Example of development : https://www.youtube.com/watch?v=y5QypM9UDlM&list=PLs0IvtzpkvAvG9n2ssQlBxbdltSjt6DMy (Show only create custom commands)
+Example of development (Show only how to create custom commands) : 
+https://www.youtube.com/watch?v=y5QypM9UDlM&list=PLs0IvtzpkvAvG9n2ssQlBxbdltSjt6DMy
 
 Wiki
 
