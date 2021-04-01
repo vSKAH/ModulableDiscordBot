@@ -7,7 +7,7 @@ package fr.skah.mdb.commands;
  */
 
 import fr.skah.mdb.ModulableDiscordBot;
-import fr.skah.mdb.utils.Utils;
+import fr.skah.mdb.utils.Util;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -27,7 +27,7 @@ public class CommandExecutor {
             }
         }
 
-        Utils.sendTemporaryMessage(message.getTextChannel(), ":x: Cette commande n'existe pas. \nVeuillez saisir 'Help pour afficher la liste des commandes !", 10);
+        Util.sendTemporaryMessage(message.getTextChannel(), ":x: Cette commande n'existe pas. \nVeuillez saisir 'Help pour afficher la liste des commandes !", 10);
     }
 
     private CommandState processCommand(Command command, String[] args) {
@@ -40,7 +40,7 @@ public class CommandExecutor {
             }
 
             if (command.isRespectSyntax() && args.length != command.getSyntaxe().split(" ").length) {
-                Utils.sendTemporaryEmbed(command.getTextChannel(), new EmbedBuilder().setDescription("Veuillez utiliser la commande de la façon suivante\n" + command.getSyntaxe()), 10);
+                Util.sendTemporaryEmbed(command.getTextChannel(), new EmbedBuilder().setDescription("Veuillez utiliser la commande de la façon suivante\n" + command.getSyntaxe()), 10);
                 return CommandState.SYNTAX_ERROR;
             }
 

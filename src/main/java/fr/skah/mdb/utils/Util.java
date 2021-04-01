@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class Utils {
+public class Util {
 
     public static void sendTemporaryEmbed(TextChannel textChannel, EmbedBuilder embedBuilder, int seconds) {
         textChannel.sendMessage(embedBuilder.build()).delay(seconds, TimeUnit.SECONDS).flatMap(Message::delete).queue();
