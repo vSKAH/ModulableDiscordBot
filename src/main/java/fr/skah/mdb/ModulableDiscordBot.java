@@ -33,7 +33,7 @@ public class ModulableDiscordBot {
         try {
             new ModuleLoader().loadModules();
             MODULES_LOADED.values().forEach(Module::onLoad);
-            JDA jda = JDABuilder.createDefault("MY-TOKEN").enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
+            JDA jda = JDABuilder.createDefault("YOUR-TOKEN").enableIntents(GatewayIntent.GUILD_PRESENCES).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setActivity(Activity.watching("MY DISCORD")).build();
             jda.addEventListener(new MessageListener());
             LISTENERS.values().parallelStream().forEach(jda::addEventListener);
             Thread.sleep(5000);
