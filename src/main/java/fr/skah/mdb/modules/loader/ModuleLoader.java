@@ -18,8 +18,7 @@ import java.util.jar.JarFile;
 
 public class ModuleLoader {
 
-    private static final String EXECUTION_PATH = System.getProperty("user.dir");
-    private static final File MODULES_FOLDER = new File(EXECUTION_PATH, "modules");
+    private static final File MODULES_FOLDER = new File(System.getProperty("user.dir"), "modules");
 
     public void loadModules() {
         if (!MODULES_FOLDER.exists()) {
