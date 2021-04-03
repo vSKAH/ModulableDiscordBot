@@ -7,15 +7,13 @@ package fr.skah.mdb.modules;
  */
 
 import fr.skah.mdb.modules.loader.ModuleOptions;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import fr.skah.mdb.utils.Files;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.io.File;
 
 public abstract class Module {
 
     private ModuleOptions moduleOptions;
-    private final HashMap<UUID, ListenerAdapter> listenerAdapterHashMap = new HashMap<>();
 
 
     /*
@@ -46,13 +44,8 @@ public abstract class Module {
         this.moduleOptions = moduleOptions;
     }
 
-
-
-    /*Get listeners of bot.
-     * You can add your listeners and load on startup of module
-     * if you delete listener on runtime the listener will not be unload on shutdown of module*/
-
-    public HashMap<UUID, ListenerAdapter> getListenerAdapters() {
-        return listenerAdapterHashMap;
+    public File getDataFolder() {
+        return new File(Files.BASE_FOLDER, getModuleOptions().getModuleName());
     }
+
 }

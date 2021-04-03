@@ -16,13 +16,13 @@ import java.util.Map;
 
 public class CommandExecutor {
 
-    public void checkIfCommandExist(Message message, String[] args) {
+    public void commandExist(Message message, String[] args) {
 
         for (Map.Entry<String, Command> commandEntry : ModulableDiscordBot.COMMANDS.entrySet()) {
             Command command = commandEntry.getValue();
             if (args[0].equalsIgnoreCase("'" + command.getCommandName())) {
                 command.setMessage(message);
-                processCommand(command, args);
+                execute(command, args);
                 return;
             }
             System.out.println(commandEntry.getKey() + "     " + commandEntry.getValue().getSyntaxe());
@@ -30,7 +30,7 @@ public class CommandExecutor {
         Util.sendTemporaryMessage(message.getTextChannel(), ":x: Cette commande n'existe pas. \nVeuillez saisir 'Help pour afficher la liste des commandes !", 10);
     }
 
-    private CommandState processCommand(Command command, String[] args) {
+    private CommandState execute(Command command, String[] args) {
 
         if (command.getGuild().getMemberById(command.getUser().getIdLong()) != null) {
 

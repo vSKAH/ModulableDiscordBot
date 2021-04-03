@@ -9,6 +9,7 @@ package fr.skah.mdb.modules.loader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.skah.mdb.ModulableDiscordBot;
 import fr.skah.mdb.modules.Module;
+import fr.skah.mdb.utils.Files;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +19,12 @@ import java.util.jar.JarFile;
 
 public class ModuleLoader {
 
-    private static final File MODULES_FOLDER = new File(System.getProperty("user.dir"), "modules");
-
     public void loadModules() {
-        if (!MODULES_FOLDER.exists()) {
-            MODULES_FOLDER.mkdirs();
+        if (!Files.MODULES_FOLDER.exists()) {
+            Files.MODULES_FOLDER.mkdirs();
         }
 
-        for (File file : MODULES_FOLDER.listFiles(file -> file.getName().endsWith(".jar"))) {
+        for (File file : Files.MODULES_FOLDER.listFiles(file -> file.getName().endsWith(".jar"))) {
             try {
                 Module module = loadModule(file.getName());
                 ModulableDiscordBot.MODULES_LOADED.put(module.getModuleOptions().getModuleName(), module);
@@ -37,7 +36,7 @@ public class ModuleLoader {
 
     public Module loadModule(String jarName) throws IOException {
 
-        File moduleFile = new File(MODULES_FOLDER, jarName);
+        File moduleFile = new File(Files.MODULES_FOLDER, jarName);
         try {
             ModuleOptions moduleOptions = getModuleOption(moduleFile);
             Module module = new ModuleClassLoader(moduleFile, getClass().getClassLoader(), Objects.requireNonNull(moduleOptions)).getModule();

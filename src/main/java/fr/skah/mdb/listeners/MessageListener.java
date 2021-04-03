@@ -22,7 +22,7 @@ public class MessageListener extends ListenerAdapter {
         if (msg.getAuthor().isBot()) return;
         if (!msg.getContentRaw().startsWith("'")) return;
 
-        new CommandExecutor().checkIfCommandExist(msg, msg.getContentRaw().length() != 0 ? get(msg.getContentRaw().split(" ")) : new String[0]);
+        new CommandExecutor().commandExist(msg, msg.getContentRaw().length() != 0 ? get(msg.getContentRaw().split(" ")) : new String[0]);
     }
 
     private String[] get(String[] tab) {
